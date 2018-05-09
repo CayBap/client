@@ -1,0 +1,22 @@
+<mat-toolbar class="example-toolbar"
+             color="accent"
+             selected="true" style="position: relative;">
+  <span style="font-size:15px;font-weight: bold">Tên đội: {{title}}</span>
+
+  <!-- This fills the remaining space of the current row -->
+  <div class="logo"  style="height: 100%; position: absolute; left: calc(50% - 32px);"><img style="height: 100%; width: 64px;" src="../../assets/arena.png"></div>
+  <button (click)="onLogOut()"
+          mat-button
+          style="font-size:15px;font-weight: bold; margin-left: calc(100% - 210px);">Đăng xuất</button>
+</mat-toolbar>
+
+<mat-sidenav-container class="body">
+  <div style="height: 100%; overflow: hidden;">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>
+
+<footer style="text-align: center">
+  <p style="color: white">Power by <a href="https://www.facebook.com/HITClub.HaUI/"
+       style="color:palegoldenrod">HIT club </a> </p>
+</footer>

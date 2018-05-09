@@ -1,0 +1,90 @@
+#time {
+  margin: 0 auto;
+  background: yellow;
+
+  /* Safari */
+  height: 40px;
+  width: 40px;
+  background-color: #e7eff9;
+  border: 3px solid rgb(34, 4, 29);
+  line-height: 40px;
+  border-radius: 20px;
+}
+
+#time p {
+  color: rgb(232, 82, 82);
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  line-height: 34px;
+  width: 34px;
+  font-size: 20px;
+}
+
+.floatleft {
+  float: left;
+}
+
+/* mat-list {
+    margin-top: 70px;
+    padding: 0px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+mat-list-item {
+    height: 100px;
+} */
+.answer {
+  text-align: center;
+  margin: 8px auto;
+  width: 80%;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  button {
+    white-space: normal;
+    text-align: center;
+    padding: 4px 0;
+    width: 100%;
+    font-size: 14px;
+  }
+}
+#questcont {
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 24px;
+  text-transform: uppercase;
+  padding-top: 16px;
+}
+
+#content {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #e7eff9;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  p {
+    padding: 8px;
+  }
+  margin-bottom: 24px;
+}
+
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary,
+.mat-raised-button.mat-primary {
+  background-color: #b53d00;
+}
+.game {
+  min-height: calc(100% - 20px);
+  width: 100%;
+}
+.answerList {
+  height: calc(100% - 150px);
+
+  overflow: auto;
+  margin: 0 5%;
+}
+.question {
+  height: calc(100% - 46px);
+}
