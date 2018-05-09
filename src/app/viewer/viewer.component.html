@@ -1,0 +1,32 @@
+<br>
+<div style="text-align: center;margin-top: 10%">
+    <div style="margin: 20px; size: 30px">
+        <strong style="text-align: center">Thêm tài khoản</strong>
+    </div>
+    <mat-form-field class="example-full-width" >
+        <input [(ngModel)]="signUpStudentId" matInput placeholder="Mã sinh viên">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="signUpName" matInput placeholder="Tên sinh viên">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="signUpPhone" matInput placeholder="Số điện thoại">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="signUpPassword" matInput placeholder="Mật khẩu">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="signUpRePassword" matInput placeholder="Nhập lại mật khẩu">
+    </mat-form-field>
+    <br>
+    <div style="text-align: center; margin: 16px;">
+        <button mat-raised-button
+                color="warn"
+                (click)="signUp()">Thêm tài khoản</button>
+     
+      </div>
+</div>

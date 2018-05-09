@@ -1,0 +1,30 @@
+h3 {
+  text-align: center;
+  font-weight: bold;
+}
+.panel-primary > .panel-heading {
+  background-color: #f57c00;
+}
+.btn-nav {
+  margin: 24 auto;
+  text-align: center;
+}
+.scoreBoard {
+  padding-top: 4%;
+  .item {
+    margin: 16px 0;
+    position: relative;
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+    mat-progress-spinner {
+      text-align: center;
+      margin: 0 auto;
+    }
+    .number {
+      color: white;
+      font-size: 28px;
+      font-weight: 700;
+    }
+  }
+}

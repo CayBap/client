@@ -1,0 +1,14 @@
+<div class="alter" *ngIf="this.started === false">
+  <h4>Bạn đã hoàn thành câu hỏi của mình!</h4>
+  <h4 class="game_title">Bắt bà.</h4>
+  <div>
+    <button (click)="startGame()" mat-raised-button>10 con</button>
+    <button mat-raised-button>15 con</button>
+    <button mat-raised-button>20 con</button>
+  </div>
+</div>
+<div class="wrapper" *ngIf="this.started === true" #wrapper>
+  <!-- <div class="result"><span>Score: {{this.score}}</span><span>Time: {{this.Time}}</span></div> -->
+  <div class="target" [ngStyle]="{'width.px': this.randomSize, 'top.px': this.randomTop, 'right.px': this.randomRight, 'height.px': this.randomSize }">
+    <img class="img" (click)="this.getRandom()" src="../../../../assets//white-chicken-animated-3d-model-low-poly-animated-rigged-obj-fbx-stl-unitypackage.png"> </div>
+</div>
