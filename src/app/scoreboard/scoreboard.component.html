@@ -32,20 +32,22 @@
                                             <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 25%;">Tên Sinh Viên</th>
 
                                             <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 10%;">Thời gian</th>
+
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 10%;">Điểm bắt gà</th>
+
                                             <!-- <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 10%;">Vị trí câu hỏi</th> -->
                                             <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 10%;">Status</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 10%;">Online</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let score of listScore" class="gradeA odd" role="row" [ngStyle]="{'color':score.status?'blue':'red', 'font-style':score.lastTime== -10?'italic':''}">
+                                        <tr *ngFor="let score of listScore" class="gradeA odd" role="row">
                                             <td class="">{{listScore.indexOf(score) + 1}}</td>
                                             <td class="">{{score.studentId}}</td>
                                             <td class="">{{score.name}}</td>
-                                            <td class="center">{{score.lastTime}}</td>
+                                            <td class="center">{{score.time}}</td>
+                                            <td class="center">{{score.score}}</td>
                                             <td class="center">{{score.status?'passed':'losed'}}</td>
-
-                                            <td class="center" [ngStyle]="{'color':score.userId.isOnline?'green':'gray', 'font-style':score.userId.isOnline?'bold':'italic'}">{{score.userId.isOnline?'Online':'Offline'}}</td>
 
                                         </tr>
 
@@ -64,19 +66,14 @@
     </div>
 </div>
 <div *ngIf="this.scoreboard === false" class="scoreBoard">
-    <div>
-        <mat-form-field>
-            <input matInput placeholder="Mã sinh viên" [(ngModel)]="this.user">
-        </mat-form-field>
+    <div class="item" *ngFor="let item of viewerAnswerasPercent; index as i">
+        <circle-progress [percent]="item" maxPercent=100 [radius]="75" [outerStrokeWidth]="16" [innerStrokeWidth]="8" subtitle='' [titleColor]="'#fff'" titleFontSize=36 [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300"></circle-progress>
+
+        <!-- <mat-progress-spinner class="example-margin"
+                          mode=determinate
+                          [value]="item">
+
+    </mat-progress-spinner> -->
+        <span class="number">Đáp án {{i+1}}</span>
     </div>
-    <div>
-        <mat-form-field>
-            <input matInput placeholder="Mật khẩu" [(ngModel)]="this.pass">
-        </mat-form-field>
-    </div>
-    <button mat-raised-button color="warn" (click)="resetPass()">Reset password</button>
-</div>
-<div class="btn-nav">
-    <button mat-raised-button color="warn" (click)="showScore()">Show score board</button>
-    <button mat-raised-button color="warn" (click)="showResetPass()">Show reset Password form</button>
 </div>

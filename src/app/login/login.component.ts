@@ -45,7 +45,9 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['login']);
     }
   }
-
+  loginAsViewer() {
+    this.router.navigate(['viewer']);
+  }
   logIn() {
     if (this.logInUsername.length < 10 || this.logInUsername.length > 12) {
       alert('Mã sinh viên không đúng');
@@ -56,7 +58,6 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.auth.logIn(this.logInUsername, this.logInPassword).then(res => {
-      console.log(res);
       if (res.code == 3) {
         localStorage.setItem('token', res.token);
         localStorage.setItem('userName', res.user.name);
@@ -115,8 +116,6 @@ export class LoginComponent implements OnInit {
           alert(res.message);
         }
       })
-      .catch(err => {
-        alert('Đăng ký thất bại, vui lòng thử lại');
-      });
+      .catch(err => alert('Đăng ký thất bại, vui lòng thử lại'));
   }
 }

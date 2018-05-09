@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.module';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
-import { ViewerComponent } from './viewer/viewer.component';
 const routes: Routes = [
   {
     path: 'login',
@@ -12,10 +11,7 @@ const routes: Routes = [
     path: 'scoreboard',
     component: ScoreboardComponent
   },
-  {
-    path: 'viewer',
-    component: ViewerComponent
-  },
+ 
   {
     path: 'main',
     loadChildren: './main/main.module#MainModule'

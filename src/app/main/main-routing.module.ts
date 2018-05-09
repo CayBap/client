@@ -5,6 +5,7 @@ import { PlayingComponent } from './playing/playing.component';
 import { AdminComponent } from './admin/admin.component';
 import { MainComponent } from './main.component';
 import {} from './view';
+import { ViewerComponent } from './viewer/viewer.conponent';
 const routes: Routes = [
   {
     path: '',
@@ -18,7 +19,10 @@ const routes: Routes = [
         path: 'admin',
         component: AdminComponent
       },
-
+      {
+        path:'viewer',
+        component:ViewerComponent
+      },
       {
         path: '',
         redirectTo: 'playing',

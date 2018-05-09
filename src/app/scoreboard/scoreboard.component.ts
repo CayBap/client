@@ -10,8 +10,6 @@ import { SocketService } from '../socket';
   styleUrls: ['./scoreboard.component.scss']
 })
 export class ScoreboardComponent implements OnInit {
-  user: '';
-  pass: '';
   scoreboard = true;
   listScore = [];
   listShow = [];
@@ -25,11 +23,15 @@ export class ScoreboardComponent implements OnInit {
     private socket: SocketService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
 
-  showResetPass() {
+    this.showViewerResult();
+  }
+  showViewerResult() {
     this.scoreboard = false;
     clearInterval(this.loop);
+    this.showScore();
+    
   }
   showScore() {
     let self = this;
@@ -40,11 +42,6 @@ export class ScoreboardComponent implements OnInit {
         }
       });
     }, 1000);
-
     this.scoreboard = true;
-  }
-  resetPass() {
-    console.log(this.user);
-    console.log(this.pass);
   }
 }

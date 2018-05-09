@@ -119,7 +119,11 @@ export class PlayingComponent implements OnInit, OnDestroy {
       if (data.command === 112) {
         this.noiDung =
           'Chúc mừng bạn đã được cứu trợ. Hãy sẵn sàng cho câu hỏi tiếp theo.';
+        this.count = 0;
         this.Subscription = this.socket.waitQuestion().subscribe(data => {
+          if (data.command === 911) {
+            clearInterval(this.quetSprint);
+          }
           if (data.command === 1000) {
             this.playerAnswer = '';
             this.count++;
@@ -188,6 +192,9 @@ export class PlayingComponent implements OnInit, OnDestroy {
         this.noiDung =
           'Chào mừng bạn đến với đấu trường IT Phần chơi của bạn sắp bắt đầu';
         this.Subscription = this.socket.waitQuestion().subscribe(data => {
+          if (data.command === 911) {
+            clearInterval(this.quetSprint);
+          }
           if (data.command === 1000) {
             this.playerAnswer = '';
             this.count++;
@@ -232,6 +239,7 @@ export class PlayingComponent implements OnInit, OnDestroy {
             }, 1000);
           }
           if (data.command === 9999) {
+            this.isPlaying = true;
             this.playground.check(this.token, this.studentId).then(res => {
               if (res.code === 0) {
                 this.noiDung = 'Rất tiếc bạn đã bị loại.';

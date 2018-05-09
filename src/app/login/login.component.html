@@ -13,7 +13,12 @@
                         <li class="active">
                             <a href="#login" data-toggle="tab"> Đăng nhập </a>
                         </li>
-
+                        <li>
+                            <a href="#signup" data-toggle="tab"> Đăng kí </a>
+                        </li>
+                        <li>
+                            <a (click)="loginAsViewer()"> Khán giả </a>
+                        </li>
                     </ul>
                 </div>
 
@@ -69,136 +74,103 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- 
-            <div id="signup"
-                 class="tab-pane fade">
-              <div class="container-fluid">
-                <div class="row">
-                  <h2 class="text-center"
-                      style="color: #f0ad4e;">
-                    <Strong> Đấu trường IT 2018 </Strong>
-                  </h2>
-                  <hr />
-                  <div class="row">
-                    <div class="col-xs-0 col-sm-0 col-md-1 col-lg-1">
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-10">
-                      <div class="form-group">
-                        <div class="input-group">
-                          <div class="input-group-addon iga1">
-                            <span class="glyphicon glyphicon-user"></span>
-                          </div>
-                          <input [(ngModel)]="signUpName"
-                                 type="text"
-                                 class="form-control"
-                                 placeholder="Họ và Tên"
-                                 name="name"
-                                 required>
+
+                        <div id="signup" class="tab-pane fade">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <h2 class="text-center" style="color: #f0ad4e;">
+                                        <Strong> Đấu trường IT 2018 </Strong>
+                                    </h2>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-xs-0 col-sm-0 col-md-1 col-lg-1">
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-10">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon iga1">
+                                                        <span class="glyphicon glyphicon-user"></span>
+                                                    </div>
+                                                    <input [(ngModel)]="signUpName" type="text" class="form-control" placeholder="Họ và Tên" name="name" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-0 col-sm-0 col-md-1 col-lg-1">
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-10">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon iga1">
+                                                        <span class="glyphicon glyphicon-envelope"></span>
+                                                    </div>
+                                                    <input [(ngModel)]="signUpStudentId" type="text" pattern="[0-9]" class="form-control" placeholder="Mã Sinh Viên" name="studentID" minlength="10" maxlength="12">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-0 col-sm-0 col-md-1 col-lg-1">
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-10">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon iga1">
+                                                        <span class="glyphicon glyphicon-book"></span>
+                                                    </div>
+                                                    <input [(ngModel)]="signUpPhone" type="text" pattern="[0-9]" class="form-control" placeholder="Số Điện Thoại" name="phone" minlength="10" maxlength="12">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="col-xs-0 col-sm-0 col-md-1 col-lg-1">
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-10">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon iga1">
+                                                        <span class="glyphicon glyphicon-lock"></span>
+                                                    </div>
+                                                    <input [(ngModel)]="signUpPassword" type="password" class="form-control" placeholder="Mật khẩu" name="pass" minlength="6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-0 col-sm-0 col-md-1 col-lg-1">
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-10">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon iga1">
+                                                        <span class="glyphicon glyphicon-lock"></span>
+                                                    </div>
+                                                    <input [(ngModel)]="signUpRePassword" type="password" class="form-control" placeholder="Nhập lại mật khẩu" name="pass" minlength="6">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2">
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-8">
+                                            <div class="form-group">
+                                                <button (click)="signUp()" type="submit" class="btn btn-lg btn-block btn-warning"> Đăng Kí</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-0 col-sm-0 col-md-1 col-lg-1">
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-10">
-                      <div class="form-group">
-                        <div class="input-group">
-                          <div class="input-group-addon iga1">
-                            <span class="glyphicon glyphicon-envelope"></span>
-                          </div>
-                          <input [(ngModel)]="signUpStudentId"
-                                 type="text"
-                                 pattern="[0-9]"
-                                 class="form-control"
-                                 placeholder="Mã Sinh Viên"
-                                 name="studentID"
-                                 minlength="10"
-                                 maxlength="12">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-0 col-sm-0 col-md-1 col-lg-1">
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-10">
-                      <div class="form-group">
-                        <div class="input-group">
-                          <div class="input-group-addon iga1">
-                            <span class="glyphicon glyphicon-book"></span>
-                          </div>
-                          <input [(ngModel)]="signUpPhone"
-                                 type="text"
-                                 pattern="[0-9]"
-                                 class="form-control"
-                                 placeholder="Số Điện Thoại"
-                                 name="phone"
-                                 minlength="10"
-                                 maxlength="12">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-
-                  <div class="row">
-                    <div class="col-xs-0 col-sm-0 col-md-1 col-lg-1">
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-10">
-                      <div class="form-group">
-                        <div class="input-group">
-                          <div class="input-group-addon iga1">
-                            <span class="glyphicon glyphicon-lock"></span>
-                          </div>
-                          <input [(ngModel)]="signUpPassword"
-                                 type="password"
-                                 class="form-control"
-                                 placeholder="Mật khẩu"
-                                 name="pass"
-                                 minlength="6">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-0 col-sm-0 col-md-1 col-lg-1">
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-10">
-                      <div class="form-group">
-                        <div class="input-group">
-                          <div class="input-group-addon iga1">
-                            <span class="glyphicon glyphicon-lock"></span>
-                          </div>
-                          <input [(ngModel)]="signUpRePassword"
-                                 type="password"
-                                 class="form-control"
-                                 placeholder="Nhập lại mật khẩu"
-                                 name="pass"
-                                 minlength="6">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2">
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-8">
-                      <div class="form-group">
-                        <button (click)="signUp()"
-                                type="submit"
-                                class="btn btn-lg btn-block btn-warning"> Đăng Kí</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
                     </div>
                 </div>
                 <div class="">
