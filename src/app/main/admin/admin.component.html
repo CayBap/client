@@ -7,13 +7,13 @@
         </div>
     </div>
     <div style="text-align: center">
-        <button mat-raised-button color="warn" (click)="nextQuestion()">Next</button>
+        <button mat-raised-button color="warn" [disabled]="this.disableNext" (click)="nextQuestion()">Next</button>
         <div class="quest">
             <p style="color: white;  margin: 8px;"> Câu hỏi tiếp theo: {{this.cauHoiTiepTheo}}</p>
         </div>
     </div>
-    <div style="text-align: center">
-        <button mat-raised-button color="warn" (click)="showAnswer()">Show answer</button>
+    <div style="text-align: center; margin: 16px;">
+        <button mat-raised-button color="warn" [disabled]="this.disableShowAnswer" (click)="showAnswer()">Show answer</button>
 
     </div>
     <div style="text-align: center">
@@ -23,7 +23,7 @@
         </div>
     </div>
     <div style="text-align: center; margin: 16px;">
-        <button mat-raised-button color="warn" (click)="cuuTro()">Cứu Trợ</button>
+        <button mat-raised-button color="warn" (click)="revival()">Cứu Trợ</button>
 
     </div>
     <div>

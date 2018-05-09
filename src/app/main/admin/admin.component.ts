@@ -14,6 +14,8 @@ import {
 export class AdminComponent implements OnInit {
   _id = '5ac0bb46e2712117d8097831';
   disableStart = false;
+  disableNext = true;
+  disableShowAnswer = true;
   token;
   cauHoiHienTai = '';
   cauHoiTiepTheo = '';
@@ -33,9 +35,13 @@ export class AdminComponent implements OnInit {
     });
   }
   showAnswer() {
+    this.disableShowAnswer = true;
+    this.disableNext = false;
     this.socket.showAnswer();
   }
   nextQuestion() {
+    this.disableNext = true;
+    this.disableShowAnswer = false;
     this.socket.nextQuestion(this.listQuestion[this.indexQuestion].questId._id);
     this.indexQuestion++;
     this.cauHoiTiepTheo = this.listQuestion[this.indexQuestion].questId.content;
@@ -46,6 +52,7 @@ export class AdminComponent implements OnInit {
 
   start() {
     this.disableStart = true;
+    this.disableShowAnswer = false;
     this.cauHoiHienTai = this.listQuestion[
       this.indexQuestion - 1
     ].questId.content;
@@ -55,9 +62,9 @@ export class AdminComponent implements OnInit {
   getHelper() {
     this.socket.getViewerHelper();
   }
-  cuuTro() {
+  revival() {
     this.indexQuestion = 0;
-    this.socket.cuuTro();
+    this.socket.revival();
     this._id = '5ae75589e27121176cc1a549';
     this.questionList.getList(this.token, this._id).then(res => {
       console.log(res);
