@@ -41,7 +41,9 @@ export class AdminComponent implements OnInit {
   }
   nextQuestion() {
     this.disableNext = true;
-    this.disableShowAnswer = false;
+    setTimeout(() => {
+      this.disableShowAnswer = false;
+    }, 20000);
     this.socket.nextQuestion(this.listQuestion[this.indexQuestion].questId._id);
     this.indexQuestion++;
     this.cauHoiTiepTheo = this.listQuestion[this.indexQuestion].questId.content;
@@ -52,7 +54,9 @@ export class AdminComponent implements OnInit {
 
   start() {
     this.disableStart = true;
-    this.disableShowAnswer = false;
+    setTimeout(() => {
+      this.disableShowAnswer = false;
+    }, 20000);
     this.cauHoiHienTai = this.listQuestion[
       this.indexQuestion - 1
     ].questId.content;

@@ -1,20 +1,20 @@
 <div id="time" *ngIf="timeChoi != -10 && this.isPlaying == true&&this.isSendAnswer==false">
-  <p id="thoigian"> {{ timeChoi }}</p>
+    <p id="thoigian"> {{ timeChoi }}</p>
 </div>
 <div id="questcont" *ngIf="noiDung.length > 0&&this.isPlaying==true" color="accent">
-  <mat-card id="content"> {{ noiDung }}</mat-card>
+    <mat-card id="content"> {{ noiDung }}</mat-card>
 </div>
 <div class="question" *ngIf="this.isPlaying == true&&this.isSendAnswer==false">
-  <div id="questcont" *ngIf="cauHoi.length > 0">
-    <div id="content">
-      <p>Câu hỏi {{count}} : {{ cauHoi }}</p>
+    <div id="questcont" *ngIf="cauHoi.length > 0">
+        <div id="content">
+            <p>Câu hỏi {{count}} : {{ cauHoi }}</p>
+        </div>
     </div>
-  </div>
-  <div class="answerList">
-    <div class="answer" *ngFor="let shoe of arrDapAn">
-      <button (click)="onAnswer($event)" mat-raised-button color="primary" style="color:white">{{shoe.answer}}</button>
+    <div class="answerList">
+        <div class="answer" *ngFor="let shoe of arrDapAn">
+            <button (click)="onAnswer($event)" mat-raised-button color="primary" style="color:white">{{shoe.answer}}</button>
+        </div>
     </div>
-  </div>
 </div>
-<app-game class="game" *ngIf="this.isPlaying == false">
+<app-game (catched)="catched($event)" class="game" *ngIf="this.isPlaying == false">
 </app-game>

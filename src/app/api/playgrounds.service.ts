@@ -86,7 +86,23 @@ export class PlaygroundsService {
       .then(res => res.json())
       .catch(this.handleError);
   }
+  public postChickenScore(
+    token: string,
+    studentId: string,
+    score: number
+  ): Promise<any> {
+    this.headers.set('x-access-token', token);
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('studentId', studentId);
+    urlSearchParams.append('chickenScore', score.toString());
+    let url = this.rootUrl + '/postChickenScore';
 
+    return this.http
+      .post(url, urlSearchParams.toString(), { headers: this.headers })
+      .toPromise()
+      .then(res => res.json())
+      .catch(this.handleError);
+  }
   public checkLogin(token: string, studentId: string): Promise<any> {
     this.headers.set('x-access-token', token);
     let urlSearchParams = new URLSearchParams();

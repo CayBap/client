@@ -25,7 +25,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./playing.component.scss']
 })
 export class PlayingComponent implements OnInit, OnDestroy {
-  losed = false;
+  chickenCatched = 0;
   playerAnswer: '';
   message: any;
   subscribeCheck: Subscription;
@@ -226,6 +226,11 @@ export class PlayingComponent implements OnInit, OnDestroy {
                 self.Subscription.unsubscribe();
               }
               if (self.timeChoi < 1 && self.isSendAnswer === true) {
+                self.playground.postChickenScore(
+                  self.token,
+                  self.studentId,
+                  self.chickenCatched
+                );
                 console.log('het gio');
                 clearInterval(self.quetSprint);
                 self.isPlaying = true;
@@ -277,7 +282,9 @@ export class PlayingComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+  catched($event) {
+    this.chickenCatched++;
+  }
   openDialog(title: string, content: string, callback: Function) {
     this.dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
