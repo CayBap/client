@@ -10,6 +10,7 @@ import {
 } from './playing/playing.component';
 import { AdminComponent } from './admin/admin.component';
 import { GameComponent } from './playing/game/game.component';
+import {ViewerComponent} from './viewer/viewer.conponent'
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { GameComponent } from './playing/game/game.component';
     PlayingComponent,
     DialogOverviewExampleDialog,
     AdminComponent,
-    GameComponent
+    GameComponent,
+    ViewerComponent
   ],
   providers: [],
   entryComponents: [DialogOverviewExampleDialog]

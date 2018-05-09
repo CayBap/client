@@ -11,11 +11,10 @@ import { CoreModule } from './core/core.module';
 import { ApiModule } from './api';
 import { SocketModule } from './socket';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
-import { ViewerComponent } from './viewer/viewer.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
-  declarations: [AppComponent, ScoreboardComponent, ViewerComponent],
+  declarations: [AppComponent, ScoreboardComponent],
   imports: [
     NgCircleProgressModule.forRoot({
       // set defaults here

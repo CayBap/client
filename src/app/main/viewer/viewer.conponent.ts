@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SocketService } from '../socket/socket.service';
-import { UsersService } from '../api';
+import { SocketService } from '../../socket/socket.service';
+import { UsersService } from '../../api';
 
 @Component({
   selector: 'app-viewer',
