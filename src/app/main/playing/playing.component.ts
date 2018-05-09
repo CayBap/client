@@ -25,6 +25,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./playing.component.scss']
 })
 export class PlayingComponent implements OnInit, OnDestroy {
+  losed = false;
+  playerAnswer: '';
   message: any;
   subscribeCheck: Subscription;
   Subscription: Subscription;
@@ -110,70 +112,141 @@ export class PlayingComponent implements OnInit, OnDestroy {
         token: this.token
       });
     });
-    this.players.check(this.token, this.studentId).then(res => {
-      this.isPlaying = true;
-      this.noiDung =
-        'Chào mừng bạn đến với đấu trường IT Phần chơi của bạn sắp bắt đầu';
-      this.socket.getSOS().subscribe(message => {
-        clearInterval(this.quetSprint);
-      });
 
-      if (res.code === 0) {
-        this.isPlaying = true;
+    // Phần cứu trợ
+
+    this.socket.onRevial().subscribe(data => {
+      if (data.command === 112) {
         this.noiDung =
-          'Bạn đã bị loại, đăng nhập với tư cách khán giả để giúp người chơi khác.';
-      } else {
-        this.Subscription = this.socket.waitQuestion().subscribe(quest => {
-          this.count++;
-          self.isSendAnswer = false;
-          this.subscribeCheck = this.socket
-            .check(this.studentId)
-            .subscribe(message => {
-              this.isPlaying = true;
-              if (message.res.code === 0) {
-                this.noiDung =
-                  'Bạn đã bị loại, đăng nhập với tư cách khán giả để giúp người chơi khác.';
-                this.timeChoi = -10;
-                this.cauHoi = '';
-                this.arrDapAn = [];
-                this.Subscription.unsubscribe();
-              } else {
-                this.timeChoi = 20;
-                this.noiDung = '';
-                this.cauHoi = quest.message.content;
-                this.arrDapAn = quest.message.options;
-                this.questionId = quest.message._id;
+          'Chúc mừng bạn đã được cứu trợ. Hãy sẵn sàng cho câu hỏi tiếp theo.';
+        this.Subscription = this.socket.waitQuestion().subscribe(data => {
+          if (data.command === 1000) {
+            this.playerAnswer = '';
+            this.count++;
+            this.isSendAnswer = false;
+            this.timeChoi = 20;
+            this.cauHoi = data.message.content;
+            this.arrDapAn = data.message.options;
+            this.questionId = data.message._id;
+            this.noiDung = '';
+            clearInterval(this.quetSprint);
+            this.quetSprint = setInterval(function() {
+              self.timeChoi = self.timeChoi - 1;
+
+              if (self.timeChoi < 1 && self.isSendAnswer === false) {
                 clearInterval(self.quetSprint);
-                this.quetSprint = setInterval(function() {
-                  if (self.timeChoi <= 1) {
-                    clearInterval(self.quetSprint);
-                    self.isPlaying = true;
-                  }
-                  self.timeChoi = self.timeChoi - 1;
-                  if (self.timeChoi < 1&&self.isSendAnswer===false) {
-                    let answer = {
-                      userName: self.userName,
-                      studentId: self.studentId,
-                      time: 20 - self.timeChoi,
-                      answer: '',
-                      questionId: self.questionId
-                    };
-                    self.socket.answer(answer);
-                    self.cauHoi = '';
-                    self.arrDapAn = [];
-                    self.noiDung =
-                      'Rất tiếc bạn đã bị loại do không trả lời câu hỏi vừa rồi';
-                    self.Subscription.unsubscribe();
-                  }
-                }, 1000);
+                const answer = {
+                  userName: self.userName,
+                  studentId: self.studentId,
+                  time: 20 - self.timeChoi,
+                  answer: '',
+                  questionId: self.questionId
+                };
+
+                self.socket.answer(answer);
+                self.cauHoi = '';
+                self.arrDapAn = [];
+                self.noiDung =
+                  'Rất tiếc bạn đã bị loại do không trả lời câu hỏi vừa rồi';
+                self.Subscription.unsubscribe();
+              }
+              if (self.timeChoi < 1 && self.isSendAnswer === true) {
+                console.log('het gio');
+                clearInterval(self.quetSprint);
+                self.isPlaying = true;
+                self.cauHoi = '';
+                self.arrDapAn = [];
+                self.noiDung =
+                  'Câu trả lời của bạn là: ' +
+                  self.playerAnswer +
+                  '. Hãy chờ MC công bố đáp án.';
+              }
+            }, 1000);
+          }
+          if (data.command === 9999) {
+            this.playground.check(this.token, this.studentId).then(res => {
+              if (res.code === 0) {
+                this.noiDung = 'Rất tiếc bạn đã bị loại.';
+                self.Subscription.unsubscribe();
+              } else {
+                this.noiDung =
+                  'Chúc mừng bạn đã trả lời chính xác. Hãy chờ câu hỏi tiếp theo';
               }
             });
+          }
+        });
+      }
+    });
+    // Phần trước khi cứu trợ
+
+    this.playground.checkLogin(this.token, this.studentId).then(res => {
+      this.isPlaying = true;
+      console.log(res);
+      if (res.code === 0) {
+        this.noiDung = 'Rất tiếc, bạn đã bị loại.';
+      } else {
+        this.noiDung =
+          'Chào mừng bạn đến với đấu trường IT Phần chơi của bạn sắp bắt đầu';
+        this.Subscription = this.socket.waitQuestion().subscribe(data => {
+          if (data.command === 1000) {
+            this.playerAnswer = '';
+            this.count++;
+            this.isSendAnswer = false;
+            this.timeChoi = 20;
+            this.cauHoi = data.message.content;
+            this.arrDapAn = data.message.options;
+            this.questionId = data.message._id;
+            this.noiDung = '';
+            clearInterval(this.quetSprint);
+            this.quetSprint = setInterval(function() {
+              self.timeChoi = self.timeChoi - 1;
+
+              if (self.timeChoi < 1 && self.isSendAnswer === false) {
+                clearInterval(self.quetSprint);
+                const answer = {
+                  userName: self.userName,
+                  studentId: self.studentId,
+                  time: 20 - self.timeChoi,
+                  answer: '',
+                  questionId: self.questionId
+                };
+
+                self.socket.answer(answer);
+                self.cauHoi = '';
+                self.arrDapAn = [];
+                self.noiDung =
+                  'Rất tiếc bạn đã bị loại do không trả lời câu hỏi vừa rồi';
+                self.Subscription.unsubscribe();
+              }
+              if (self.timeChoi < 1 && self.isSendAnswer === true) {
+                console.log('het gio');
+                clearInterval(self.quetSprint);
+                self.isPlaying = true;
+                self.cauHoi = '';
+                self.arrDapAn = [];
+                self.noiDung =
+                  'Câu trả lời của bạn là: ' +
+                  self.playerAnswer +
+                  '. Hãy chờ MC công bố đáp án.';
+              }
+            }, 1000);
+          }
+          if (data.command === 9999) {
+            this.playground.check(this.token, this.studentId).then(res => {
+              if (res.code === 0) {
+                this.noiDung = 'Rất tiếc bạn đã bị loại.';
+                self.Subscription.unsubscribe();
+              } else {
+                this.noiDung =
+                  'Chúc mừng bạn đã trả lời chính xác. Hãy chờ câu hỏi tiếp theo';
+              }
+            });
+          }
         });
       }
     });
   }
 
-  
   onAnswer(event) {
     this.openDialog(
       event.target.innerText,
@@ -189,11 +262,9 @@ export class PlayingComponent implements OnInit, OnDestroy {
           };
           this.socket.answer(answer);
           this.isPlaying = false;
-            this.isSendAnswer = true;
-            this.arrDapAn = [];
-            this.noiDung = "Chờ câu hỏi tiếp theo.";
-          // clearInterval(this.quetSprint);
-          this.subscribeCheck.unsubscribe();
+          this.isSendAnswer = true;
+          this.arrDapAn = [];
+          this.playerAnswer = event.target.innerText;
         }
       }
     );

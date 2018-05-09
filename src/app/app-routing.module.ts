@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.module';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
-
 const routes: Routes = [
   {
     path: 'login',

@@ -22,8 +22,8 @@ export class SocketService {
   login(params: any) {
     this.socket.emit('login', params);
   }
-  cuuTro(){
-    this.socket.emit('admin', {command: 404});
+  revival() {
+    this.socket.emit('admin', { command: 112 });
   }
   onLogin(): Observable<any> {
     return new Observable(observer => {
@@ -53,14 +53,14 @@ export class SocketService {
       command: 3000
     });
   }
-  check(studentId): Observable<any> {
-    this.socket.emit('admin', { message: studentId, command: 113 });
-    return new Observable(observer => {
-      this.socket.on('checked', (data: any) => {
-        observer.next(data);
-      });
-    });
-  }
+  // check(studentId): Observable<any> {
+  //   this.socket.emit('admin', { message: studentId, command: 113 });
+  //   return new Observable(observer => {
+  //     this.socket.on('checked', (data: any) => {
+  //       observer.next(data);
+  //     });
+  //   });
+  // }
   answer(answer) {
     this.socket.emit('admin', { req: answer, command: 1997 });
   }
@@ -74,21 +74,23 @@ export class SocketService {
       });
     });
   }
-  waitViewerSubmit(): Observable<any> {
+  onRevial(): Observable<any> {
     return new Observable(observer => {
-      this.socket.on('viewerSubmit', (data: any) => {
+      this.socket.on('waitAdmin', (data: any) => {
         observer.next(data);
       });
     });
   }
   waitQuestion(): Observable<any> {
     return new Observable(observer => {
-      this.socket.on('receiveQuestion', (data: any) => {
+      this.socket.on('waitAdmin', (data: any) => {
         observer.next(data);
       });
     });
   }
-
+  showAnswer() {
+    this.socket.emit('admin', { command: 9999 });
+  }
   onUser(): Observable<any> {
     return new Observable(observer => {
       this.socket.on('user', (data: any) => observer.next(data));

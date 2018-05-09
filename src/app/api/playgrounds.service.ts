@@ -73,6 +73,33 @@ export class PlaygroundsService {
       .catch(this.handleError);
   }
 
+  public check(token: string, studentId: string): Promise<any> {
+    this.headers.set('x-access-token', token);
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('studentId', studentId);
+
+    let url = this.rootUrl + '/check';
+
+    return this.http
+      .post(url, urlSearchParams.toString(), { headers: this.headers })
+      .toPromise()
+      .then(res => res.json())
+      .catch(this.handleError);
+  }
+
+  public checkLogin(token: string, studentId: string): Promise<any> {
+    this.headers.set('x-access-token', token);
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('studentId', studentId);
+
+    let url = this.rootUrl + '/checkLogin';
+
+    return this.http
+      .post(url, urlSearchParams.toString(), { headers: this.headers })
+      .toPromise()
+      .then(res => res.json())
+      .catch(this.handleError);
+  }
   public scoreboard(): Promise<any> {
     let url = this.rootUrl + '/scoreboard';
 

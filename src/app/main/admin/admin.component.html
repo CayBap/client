@@ -1,34 +1,29 @@
 <div>
-  <div style="text-align: center; margin: 16px;">
-    <button [disabled]="this.disableStart"
-            mat-raised-button
-            color="warn"
-            (click)="start()">Start</button>
-    <div class="quest">
-      <p style="color: white; margin: 8px;">Câu hỏi hiện tại: {{this.cauHoiHienTai}}
-      </p>
+    <div style="text-align: center; margin: 16px;">
+        <button [disabled]="this.disableStart" mat-raised-button color="warn" (click)="start()">Start</button>
+        <div class="quest">
+            <p style="color: white; margin: 8px;">Câu hỏi hiện tại: {{this.cauHoiHienTai}}
+            </p>
+        </div>
     </div>
-  </div>
-  <div style="text-align: center">
-    <button mat-raised-button
-            color="warn"
-            (click)="nextQuestion()">Next</button>
-    <div class="quest">
-      <p style="color: white;  margin: 8px;"> Câu hỏi tiếp theo: {{this.cauHoiTiepTheo}}</p>
+    <div style="text-align: center">
+        <button mat-raised-button color="warn" [disabled]="this.disableNext" (click)="nextQuestion()">Next</button>
+        <div class="quest">
+            <p style="color: white;  margin: 8px;"> Câu hỏi tiếp theo: {{this.cauHoiTiepTheo}}</p>
+        </div>
     </div>
-  </div>
-  <div style="text-align: center">
-    <button mat-raised-button
-            color="warn"
-            (click)="getHelper()">Người chơi yêu cầu trợ giúp</button>
-    <div class="quest">
+    <div style="text-align: center; margin: 16px;">
+        <button mat-raised-button color="warn" [disabled]="this.disableShowAnswer" (click)="showAnswer()">Show answer</button>
 
     </div>
-  </div>
-  <div style="text-align: center; margin: 16px;">
-    <button mat-raised-button
-            color="warn"
-            (click)="cuuTro()">Cứu Trợ</button>
- 
-  </div>
-  <div>
+    <div style="text-align: center">
+        <button mat-raised-button color="warn" (click)="getHelper()">Người chơi yêu cầu trợ giúp</button>
+        <div class="quest">
+
+        </div>
+    </div>
+    <div style="text-align: center; margin: 16px;">
+        <button mat-raised-button color="warn" (click)="revival()">Cứu Trợ</button>
+
+    </div>
+    <div>
