@@ -42,7 +42,6 @@ export class PlayingComponent implements OnInit, OnDestroy {
   timeChoi = -10;
   quetSprint;
   dialogRef;
-  score = 0;
   time = 0;
   count = 0;
   isPlaying = undefined;
@@ -55,7 +54,7 @@ export class PlayingComponent implements OnInit, OnDestroy {
     private router: Router,
     public dialog: MatDialog,
     private players: PlayersService
-  ) {}
+  ) { }
 
   ngOnInit() {
     // this.token = localStorage.getItem('token');
@@ -71,15 +70,6 @@ export class PlayingComponent implements OnInit, OnDestroy {
             this.router.navigate(['login']);
           } else {
             this.run();
-            // this.openDialog(
-            //   'Xin chào ' + this.userName,
-            //   'Bạn có đồng ý bắt đầu chơi',
-            //   result => {
-            //     if (result) {
-            //       this.run();
-            //     }
-            //   }
-            // );
           }
         })
         .catch(err => {
@@ -134,7 +124,7 @@ export class PlayingComponent implements OnInit, OnDestroy {
             this.questionId = data.message._id;
             this.noiDung = '';
             clearInterval(this.quetSprint);
-            this.quetSprint = setInterval(function() {
+            this.quetSprint = setInterval(function () {
               self.timeChoi = self.timeChoi - 1;
 
               if (self.timeChoi < 1 && self.isSendAnswer === false) {
@@ -155,6 +145,12 @@ export class PlayingComponent implements OnInit, OnDestroy {
                 self.Subscription.unsubscribe();
               }
               if (self.timeChoi < 1 && self.isSendAnswer === true) {
+                self.playground.postChickenScore(
+                  self.token,
+                  self.studentId,
+                  self.chickenCatched
+                );
+                self.chickenCatched= 0;
                 console.log('het gio');
                 clearInterval(self.quetSprint);
                 self.isPlaying = true;
@@ -205,7 +201,7 @@ export class PlayingComponent implements OnInit, OnDestroy {
             this.questionId = data.message._id;
             this.noiDung = '';
             clearInterval(this.quetSprint);
-            this.quetSprint = setInterval(function() {
+            this.quetSprint = setInterval(function () {
               self.timeChoi = self.timeChoi - 1;
 
               if (self.timeChoi < 1 && self.isSendAnswer === false) {
@@ -231,6 +227,8 @@ export class PlayingComponent implements OnInit, OnDestroy {
                   self.studentId,
                   self.chickenCatched
                 );
+                self.chickenCatched = 0;
+                console.log(self.chickenCatched);
                 console.log('het gio');
                 clearInterval(self.quetSprint);
                 self.isPlaying = true;
@@ -313,5 +311,5 @@ export class DialogOverviewExampleDialog {
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 }

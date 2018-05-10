@@ -4,7 +4,8 @@ import {
   ViewChild,
   ElementRef,
   Output,
-  EventEmitter
+  EventEmitter,
+  Input
 } from '@angular/core';
 
 @Component({
@@ -15,9 +16,10 @@ import {
 export class GameComponent implements OnInit {
   @ViewChild('wrapper') wrapper: ElementRef;
   @Output() catched = new EventEmitter();
+
   clientHeight;
   clientWidth;
-  score = 0;
+  @Input() score;
   time = 0;
   randomSize;
   randomTop;
@@ -29,6 +31,7 @@ export class GameComponent implements OnInit {
     this.startGame();
   }
   startGame() {
+    this.score = 0;
     this.started = true;
 
     this.randomSize = this.random(40) + 20;
@@ -37,6 +40,7 @@ export class GameComponent implements OnInit {
   }
   getRandom() {
     this.score++;
+    console.log(this.score);
     this.catched.emit('catched');
     this.clientHeight = this.wrapper.nativeElement.clientHeight;
     this.clientWidth = this.wrapper.nativeElement.clientWidth;

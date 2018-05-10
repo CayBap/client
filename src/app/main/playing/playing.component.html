@@ -16,5 +16,5 @@
         </div>
     </div>
 </div>
-<app-game (catched)="catched($event)" class="game" *ngIf="this.isPlaying == false">
+<app-game (catched)="catched($event)" score = {{chickenCatched}} class="game" *ngIf="this.isPlaying == false">
 </app-game>
