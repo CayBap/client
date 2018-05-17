@@ -25,6 +25,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./playing.component.scss']
 })
 export class PlayingComponent implements OnInit, OnDestroy {
+  isHelper= false;
   chickenCatched = 0;
   playerAnswer: '';
   message: any;
@@ -107,11 +108,14 @@ export class PlayingComponent implements OnInit, OnDestroy {
 
     this.socket.onRevial().subscribe(data => {
       if (data.command === 112) {
+        this.Subscription.unsubscribe();
+        this.count = 0;
         this.noiDung =
           'Chúc mừng bạn đã được cứu trợ. Hãy sẵn sàng cho câu hỏi tiếp theo.';
         this.count = 0;
         this.Subscription = this.socket.waitQuestion().subscribe(data => {
           if (data.command === 911) {
+            this.isHelper = true;
             clearInterval(this.quetSprint);
           }
           if (data.command === 1000) {
@@ -189,6 +193,7 @@ export class PlayingComponent implements OnInit, OnDestroy {
           'Chào mừng bạn đến với đấu trường IT Phần chơi của bạn sắp bắt đầu';
         this.Subscription = this.socket.waitQuestion().subscribe(data => {
           if (data.command === 911) {
+            this.isHelper = true;
             clearInterval(this.quetSprint);
           }
           if (data.command === 1000) {
@@ -271,8 +276,16 @@ export class PlayingComponent implements OnInit, OnDestroy {
             answer: event.target.innerText,
             questionId: this.questionId
           };
+          if(this.isHelper === true){
+            this.isPlaying = true;
+            this.noiDung = "Câu trả lời của bạn là " + event.target.innerText + ". Hãy chờ MC công bố đáp án.";
+            this.isHelper = false;
+          }
+          else{
+            this.isPlaying =false
+          }
           this.socket.answer(answer);
-          this.isPlaying = false;
+        
           this.isSendAnswer = true;
           this.arrDapAn = [];
           this.playerAnswer = event.target.innerText;
